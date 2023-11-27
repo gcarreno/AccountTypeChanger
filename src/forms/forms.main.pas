@@ -17,6 +17,8 @@ uses
 , ExtCtrls
 , StdCtrls
 , ComCtrls
+, Spin
+, fphttpclient
 , DefaultTranslator
 ;
 
@@ -25,8 +27,18 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    actStepsChangeTwice: TAction;
+    actStepsChangeOnce: TAction;
+    actStepsSendPascal: TAction;
+    actStepsConnect: TAction;
     alMain: TActionList;
     actFileExit: TFileExit;
+    btnStepsConnect: TButton;
+    edtWalletPassword: TEdit;
+    edtWalletIP: TEdit;
+    Label1: TLabel;
+    lblWalletPort: TLabel;
+    lblWalletIP: TLabel;
     lblBlock: TLabel;
     lblStatus: TLabel;
     lbSteps: TListBox;
@@ -35,6 +47,7 @@ type
     mnuFileExit: TMenuItem;
     mmMain: TMainMenu;
     Page1: TPage;
+    panStepConnectButtons: TPanel;
     panStepConnectTitle: TPanel;
     panStepSendPascalTitle: TPanel;
     panStepChangeOnceTitle: TPanel;
@@ -42,13 +55,18 @@ type
     pcSteps: TPageControl;
     panInfo: TPanel;
     lblHelp: TStaticText;
+    edtWalletPort: TSpinEdit;
+    splLog: TSplitter;
     tsChangeTwice: TTabSheet;
     tsChangeOnce: TTabSheet;
     tsSendPascal: TTabSheet;
     tsConnect: TTabSheet;
+    procedure actStepsConnectExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
+    FHTTPClient: TFPHTTPClient;
+
     procedure InitShortcuts;
     procedure UpdateStatus;
   public
@@ -62,7 +80,11 @@ implementation
 
 uses
   LCLType
+, LJD.Request
+, LJD.Response
+, LJD.Error
 , Data.NodeStatus
+, fpjson
 ;
 
 type
@@ -80,6 +102,10 @@ const
 
 resourcestring
   rsApplicationTitle = 'Account Type Changer';
+
+  rsErrorEmptyIP = 'You need to fill the Address/IP for the wallet';
+  rsErrorEmptyPort = 'You need to fill the Port for the wallet';
+  rsErrorEmptyPassword = 'You need to fill the Password for the wallet';
 
   rsApplicationStatusCaption = 'Status: %s';
   rsApplicationStatusDisconnected = 'Disconnected';
@@ -100,6 +126,8 @@ resourcestring
 var
   CurrentStatus: TStatus = stDisconnected;
   LastBlock: Int64 = -1;
+  CurrentBlock: Int64 = -1;
+  RPCID: Int64 = 1;
 
 {$R *.lfm}
 
@@ -110,6 +138,12 @@ begin
   Caption:= Format('%s v%s', [ rsApplicationTitle, cVersion ]);
   InitShortcuts;
   UpdateStatus;
+
+  lbSteps.Items.Add(rsStepConnect);
+  lbSteps.ItemIndex:= 0;
+
+  pcSteps.ShowTabs:= False;
+  pcSteps.ActivePageIndex:= 0;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -160,19 +194,100 @@ begin
   begin
     lblBlock.Caption:= Format(rsBlockNumber, [ LastBlock ]);
   end;
-  lbSteps.Items.Add(rsStepConnect);
+end;
 
-  pcSteps.ShowTabs:= False;
-  pcSteps.ActivePageIndex:= 0;
-  tsConnect.Caption:= rsStepConnect;
-  tsSendPascal.Caption:= rsStepSendPascal;
-  tsChangeOnce.Caption:= rsStepChangeOnce;
-  tsChangeTwice.Caption:= rsStepChangeTwice;
+procedure TfrmMain.actStepsConnectExecute(Sender: TObject);
+var
+  success: Boolean = False;
+  jsonRPCRequest: TRequest;
+  jsonRequestBody: TStringStream;
+  jsonResponse: String;
+  jsonRPCResponse: TResponse;
+  jsonNodeStatus: TNodeStatus;
+begin
+  actStepsConnect.Enabled:= False;
+  Application.ProcessMessages;
 
-  panStepConnectTitle.Caption:= rsStepConnect;
-  panStepSendPascalTitle.Caption:= rsStepSendPascal;
-  panStepChangeOnceTitle.Caption:= rsStepChangeOnce;
-  panStepChangeOnceTitle.Caption:= rsStepChangeTwice;
+  if Length(edtWalletIP.Text) = 0 then
+  begin
+    Application.ProcessMessages;
+    ShowMessage(rsErrorEmptyIP);
+    actStepsConnect.Enabled:= True;
+    exit;
+  end;
+
+  if (edtWalletPort.Value < 1) or (edtWalletPort.Value > 65535) then
+  begin
+    Application.ProcessMessages;
+    ShowMessage(rsErrorEmptyPort);
+    actStepsConnect.Enabled:= True;
+    exit;
+  end;
+
+  if Length(edtWalletPassword.Text) = 0 then
+  begin
+    Application.ProcessMessages;
+    ShowMessage(rsErrorEmptyPassword);
+    actStepsConnect.Enabled:= True;
+    exit;
+  end;
+
+  FHTTPClient:= TFPHTTPClient.Create(nil);
+  try
+    jsonRPCRequest:= TRequest.Create;
+    try
+      jsonRPCRequest.CompressedJSON:= True;
+      jsonRPCRequest.Method:= 'nodestatus';
+      jsonRPCRequest.ID:= RPCID;
+      Inc(RPCID);
+
+      jsonRequestBody:= TStringStream.Create(jsonRPCRequest.AsJSON);
+      try
+        FHTTPClient.AllowRedirect:= True;
+        FHTTPClient.RequestBody:= jsonRequestBody;
+        try
+          jsonResponse:= FHTTPClient.Post(Format(
+            'http://%s:%d',
+            [ edtWalletIP.Text, edtWalletPort.Value ]
+          ));
+          if Pos('error', jsonResponse) > 0 then
+          begin
+            // Deal with an RPC error
+          end;
+          jsonRPCResponse:= TResponse.Create(jsonResponse);
+          try
+            jsonRPCResponse.CompressedJSON:= False;
+            //memLog.Append(jsonRPCResponse.FormatJSON);
+            jsonNodeStatus:= TNodeStatus.Create(jsonRPCResponse.Result);
+            try
+              CurrentStatus:= stConnected;
+              LastBlock:= jsonNodeStatus.Blocks;
+              UpdateStatus;
+              jsonNodeStatus.CompressedJSON:= False;
+              memLog.Append(jsonNodeStatus.FormatJSON);
+            finally
+              jsonNodeStatus.Free;
+            end;
+          finally
+            jsonRPCResponse.Free;
+          end;
+          success:= True;
+        except
+          // Deal with errors
+        end;
+      finally
+        jsonRequestBody.Free;
+      end;
+    finally
+      jsonRPCRequest.Free;
+    end;
+  finally
+    FHTTPClient.Free;
+  end;
+
+  Application.ProcessMessages;
+  if not success then
+    actStepsConnect.Enabled:= True;
 end;
 
 end.

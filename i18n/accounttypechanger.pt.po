@@ -11,6 +11,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4\n"
 
+#: data.nodestatus.rsexceptioncannotparse
+#, object-pascal-format
+msgid "Cannot parse: %s"
+msgstr ""
+
+#: data.nodestatus.rsexceptionemptystring
+msgid "MUST not be and empty string"
+msgstr ""
+
+#: data.nodestatus.rsexceptionmissingmember
+#, object-pascal-format
+msgid "Missing member: %s"
+msgstr ""
+
+#: data.nodestatus.rsexceptionnotajsonobject
+msgid "JSON Data is not an object"
+msgstr ""
+
 #: forms.main.rsapplicationstatuscaption
 #, object-pascal-format
 msgid "Status: %s"
@@ -18,11 +36,11 @@ msgstr "Estado: %s"
 
 #: forms.main.rsapplicationstatuschangedonce
 msgid "Changed Once"
-msgstr "Modificar Primeira Vez"
+msgstr "Modificado pela primeira vez"
 
 #: forms.main.rsapplicationstatuschangedtwice
 msgid "Changed Twice"
-msgstr "Modificar Segunda Vez"
+msgstr "Modificado pela segunda vez"
 
 #: forms.main.rsapplicationstatusconnected
 msgid "Connected"
@@ -53,29 +71,87 @@ msgstr "Bloco: %d"
 msgid "Block: ??"
 msgstr "Bloco: ??"
 
+#: forms.main.rserroremptyip
+msgid "You need to fill the Address/IP for the wallet"
+msgstr ""
+
+#: forms.main.rserroremptypassword
+msgid "You need to fill the Password for the wallet"
+msgstr ""
+
+#: forms.main.rserroremptyport
+msgid "You need to fill the Port for the wallet"
+msgstr ""
+
 #: forms.main.rsstepchangeonce
+msgctxt "forms.main.rsstepchangeonce"
 msgid "Change Once"
-msgstr "Modificar Primeira Vez"
+msgstr "Modificar pela primeira vez"
 
 #: forms.main.rsstepchangetwice
+msgctxt "forms.main.rsstepchangetwice"
 msgid "Change Twice"
-msgstr "Modificar Segunda Vez"
+msgstr "Modificar pela segunda vez"
 
 #: forms.main.rsstepconnect
+msgctxt "forms.main.rsstepconnect"
 msgid "Connect"
 msgstr "Conectar"
 
 #: forms.main.rsstepsendpascal
+msgctxt "forms.main.rsstepsendpascal"
 msgid "Send Pascal"
 msgstr "Enviar Pascal"
 
 #: tfrmmain.actfileexit.caption
 msgid "E&xit"
-msgstr "Sair(&x)"
+msgstr "Sai&r"
 
 #: tfrmmain.actfileexit.hint
 msgid "Exit"
 msgstr "Sair"
+
+#: tfrmmain.actstepschangeonce.caption
+#, fuzzy
+msgctxt "tfrmmain.actstepschangeonce.caption"
+msgid "Change Once"
+msgstr "Modificar pela primeira vez"
+
+#: tfrmmain.actstepschangetwice.caption
+#, fuzzy
+msgctxt "tfrmmain.actstepschangetwice.caption"
+msgid "Change Twice"
+msgstr "Modificar pela segunda vez"
+
+#: tfrmmain.actstepsconnect.caption
+#, fuzzy
+msgctxt "tfrmmain.actstepsconnect.caption"
+msgid "Connect"
+msgstr "Conectar"
+
+#: tfrmmain.actstepssendpascal.caption
+#, fuzzy
+msgctxt "tfrmmain.actstepssendpascal.caption"
+msgid "Send Pascal"
+msgstr "Enviar Pascal"
+
+#: tfrmmain.edtwalletip.text
+msgctxt "tfrmmain.edtwalletip.text"
+msgid "127.0.0.1"
+msgstr ""
+
+#: tfrmmain.edtwalletip.texthint
+msgctxt "tfrmmain.edtwalletip.texthint"
+msgid "127.0.0.1"
+msgstr ""
+
+#: tfrmmain.edtwalletpassword.texthint
+msgid "Secret"
+msgstr ""
+
+#: tfrmmain.label1.caption
+msgid "Wallet Pa&ssword"
+msgstr ""
 
 #: tfrmmain.lblhelp.caption
 msgctxt "tfrmmain.lblhelp.caption"
@@ -94,6 +170,63 @@ msgstr ""
 "\n"
 "Enquanto um pouco mais de automação for implementada, é favor seguir estes passos."
 
+#: tfrmmain.lblwalletip.caption
+msgid "Wallet &Address or IP"
+msgstr ""
+
+#: tfrmmain.lblwalletport.caption
+msgid "Wallet &Port"
+msgstr ""
+
 #: tfrmmain.mnufile.caption
 msgid "&File"
 msgstr "&Ficheiro"
+
+#: tfrmmain.panstepchangeoncetitle.caption
+#, fuzzy
+msgctxt "tfrmmain.panstepchangeoncetitle.caption"
+msgid "Change Once"
+msgstr "Modificar pela primeira vez"
+
+#: tfrmmain.panstepchangetwicetitle.caption
+#, fuzzy
+msgctxt "tfrmmain.panstepchangetwicetitle.caption"
+msgid "Change Twice"
+msgstr "Modificar pela segunda vez"
+
+#: tfrmmain.panstepconnecttitle.caption
+#, fuzzy
+msgctxt "tfrmmain.panstepconnecttitle.caption"
+msgid "Connect"
+msgstr "Conectar"
+
+#: tfrmmain.panstepsendpascaltitle.caption
+#, fuzzy
+msgctxt "tfrmmain.panstepsendpascaltitle.caption"
+msgid "Send Pascal"
+msgstr "Enviar Pascal"
+
+#: tfrmmain.tschangeonce.caption
+#, fuzzy
+msgctxt "tfrmmain.tschangeonce.caption"
+msgid "Change Once"
+msgstr "Modificar pela primeira vez"
+
+#: tfrmmain.tschangetwice.caption
+#, fuzzy
+msgctxt "tfrmmain.tschangetwice.caption"
+msgid "Change Twice"
+msgstr "Modificar pela segunda vez"
+
+#: tfrmmain.tsconnect.caption
+#, fuzzy
+msgctxt "tfrmmain.tsconnect.caption"
+msgid "Connect"
+msgstr "Conectar"
+
+#: tfrmmain.tssendpascal.caption
+#, fuzzy
+msgctxt "tfrmmain.tssendpascal.caption"
+msgid "Send Pascal"
+msgstr "Enviar Pascal"
+

@@ -1,6 +1,24 @@
 {"version":1,"strings":[
 {"hash":208960206,"name":"tfrmmain.lblhelp.caption","sourcebytes":[70,105,114,115,116,32,102,105,108,108,32,105,110,32,116,104,101,32,67,111,110,110,101,99,116,32,115,101,99,116,105,111,110,46,10,83,101,99,111,110,100,32,99,104,111,115,101,32,97,99,99,111,117,110,116,115,32,111,110,32,116,104,101,32,83,101,110,100,32,80,97,115,99,97,108,32,115,101,99,116,105,111,110,46,10,84,104,105,114,100,32,99,104,97,110,103,101,32,111,110,99,101,46,10,84,104,105,114,100,32,99,104,97,110,103,101,32,116,119,105,99,101,46,10,10,85,110,116,105,108,32,97,32,98,105,116,32,109,111,114,101,32,97,117,116,111,109,97,116,105,111,110,32,105,115,32,105,109,112,108,101,109,101,110,116,101,100,44,32,112,108,101,97,115,101,32,102,111,108,108,111,119,32,116,104,101,115,101,32,115,116,101,112,115,46],"value":"First fill in the Connect section.\nSecond chose accounts on the Send Pascal section.\nThird change once.\nThird change twice.\n\nUntil a bit more automation is implemented, please follow these steps."},
+{"hash":174410724,"name":"tfrmmain.tsconnect.caption","sourcebytes":[67,111,110,110,101,99,116],"value":"Connect"},
+{"hash":174410724,"name":"tfrmmain.panstepconnecttitle.caption","sourcebytes":[67,111,110,110,101,99,116],"value":"Connect"},
+{"hash":32634720,"name":"tfrmmain.lblwalletip.caption","sourcebytes":[87,97,108,108,101,116,32,38,65,100,100,114,101,115,115,32,111,114,32,73,80],"value":"Wallet &Address or IP"},
+{"hash":169027393,"name":"tfrmmain.edtwalletip.text","sourcebytes":[49,50,55,46,48,46,48,46,49],"value":"127.0.0.1"},
+{"hash":169027393,"name":"tfrmmain.edtwalletip.texthint","sourcebytes":[49,50,55,46,48,46,48,46,49],"value":"127.0.0.1"},
+{"hash":66282580,"name":"tfrmmain.lblwalletport.caption","sourcebytes":[87,97,108,108,101,116,32,38,80,111,114,116],"value":"Wallet &Port"},
+{"hash":258566276,"name":"tfrmmain.label1.caption","sourcebytes":[87,97,108,108,101,116,32,80,97,38,115,115,119,111,114,100],"value":"Wallet Pa&ssword"},
+{"hash":94087364,"name":"tfrmmain.edtwalletpassword.texthint","sourcebytes":[83,101,99,114,101,116],"value":"Secret"},
+{"hash":87121180,"name":"tfrmmain.tssendpascal.caption","sourcebytes":[83,101,110,100,32,80,97,115,99,97,108],"value":"Send Pascal"},
+{"hash":87121180,"name":"tfrmmain.panstepsendpascaltitle.caption","sourcebytes":[83,101,110,100,32,80,97,115,99,97,108],"value":"Send Pascal"},
+{"hash":222219477,"name":"tfrmmain.tschangeonce.caption","sourcebytes":[67,104,97,110,103,101,32,79,110,99,101],"value":"Change Once"},
+{"hash":222219477,"name":"tfrmmain.panstepchangeoncetitle.caption","sourcebytes":[67,104,97,110,103,101,32,79,110,99,101],"value":"Change Once"},
+{"hash":63265605,"name":"tfrmmain.tschangetwice.caption","sourcebytes":[67,104,97,110,103,101,32,84,119,105,99,101],"value":"Change Twice"},
+{"hash":63265605,"name":"tfrmmain.panstepchangetwicetitle.caption","sourcebytes":[67,104,97,110,103,101,32,84,119,105,99,101],"value":"Change Twice"},
 {"hash":2805797,"name":"tfrmmain.mnufile.caption","sourcebytes":[38,70,105,108,101],"value":"&File"},
 {"hash":4710148,"name":"tfrmmain.actfileexit.caption","sourcebytes":[69,38,120,105,116],"value":"E&xit"},
-{"hash":315140,"name":"tfrmmain.actfileexit.hint","sourcebytes":[69,120,105,116],"value":"Exit"}
+{"hash":315140,"name":"tfrmmain.actfileexit.hint","sourcebytes":[69,120,105,116],"value":"Exit"},
+{"hash":174410724,"name":"tfrmmain.actstepsconnect.caption","sourcebytes":[67,111,110,110,101,99,116],"value":"Connect"},
+{"hash":87121180,"name":"tfrmmain.actstepssendpascal.caption","sourcebytes":[83,101,110,100,32,80,97,115,99,97,108],"value":"Send Pascal"},
+{"hash":222219477,"name":"tfrmmain.actstepschangeonce.caption","sourcebytes":[67,104,97,110,103,101,32,79,110,99,101],"value":"Change Once"},
+{"hash":63265605,"name":"tfrmmain.actstepschangetwice.caption","sourcebytes":[67,104,97,110,103,101,32,84,119,105,99,101],"value":"Change Twice"}
 ]}

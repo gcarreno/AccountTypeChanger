@@ -55,7 +55,7 @@ object frmMain: TfrmMain
   end
   object lbSteps: TListBox
     Left = 0
-    Height = 374
+    Height = 369
     Top = 136
     Width = 150
     Align = alLeft
@@ -65,7 +65,7 @@ object frmMain: TfrmMain
   end
   object pcSteps: TPageControl
     Left = 150
-    Height = 374
+    Height = 369
     Top = 136
     Width = 650
     ActivePage = tsConnect
@@ -73,7 +73,8 @@ object frmMain: TfrmMain
     TabIndex = 0
     TabOrder = 2
     object tsConnect: TTabSheet
-      ClientHeight = 343
+      Caption = 'Connect'
+      ClientHeight = 338
       ClientWidth = 640
       object panStepConnectTitle: TPanel
         Left = 0
@@ -81,6 +82,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 640
         Align = alTop
+        Caption = 'Connect'
         Color = clGradientActiveCaption
         Font.Height = -19
         Font.Style = [fsBold]
@@ -89,9 +91,106 @@ object frmMain: TfrmMain
         ParentFont = False
         TabOrder = 0
       end
+      object lblWalletIP: TLabel
+        Left = 4
+        Height = 17
+        Top = 54
+        Width = 636
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        Caption = 'Wallet &Address or IP'
+        FocusControl = edtWalletIP
+      end
+      object edtWalletIP: TEdit
+        Left = 4
+        Height = 34
+        Top = 75
+        Width = 628
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        BorderSpacing.Right = 8
+        TabOrder = 1
+        Text = '127.0.0.1'
+        TextHint = '127.0.0.1'
+      end
+      object lblWalletPort: TLabel
+        Left = 4
+        Height = 17
+        Top = 113
+        Width = 636
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        Caption = 'Wallet &Port'
+        FocusControl = edtWalletPort
+      end
+      object edtWalletPort: TSpinEdit
+        Left = 4
+        Height = 34
+        Top = 134
+        Width = 628
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        BorderSpacing.Right = 8
+        MaxValue = 65535
+        MinValue = 1
+        TabOrder = 2
+        Value = 4003
+      end
+      object Label1: TLabel
+        Left = 4
+        Height = 17
+        Top = 172
+        Width = 636
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        Caption = 'Wallet Pa&ssword'
+        FocusControl = edtWalletPassword
+      end
+      object edtWalletPassword: TEdit
+        Left = 4
+        Height = 34
+        Top = 193
+        Width = 628
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        BorderSpacing.Right = 8
+        TabOrder = 3
+        TextHint = 'Secret'
+      end
+      object panStepConnectButtons: TPanel
+        Left = 0
+        Height = 41
+        Top = 227
+        Width = 640
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 41
+        ClientWidth = 640
+        TabOrder = 4
+        object btnStepsConnect: TButton
+          Left = 4
+          Height = 33
+          Top = 4
+          Width = 80
+          Action = actStepsConnect
+          Align = alLeft
+          AutoSize = True
+          BorderSpacing.Around = 4
+          Constraints.MinWidth = 80
+          TabOrder = 0
+        end
+      end
     end
     object tsSendPascal: TTabSheet
-      ClientHeight = 343
+      Caption = 'Send Pascal'
+      ClientHeight = 338
       ClientWidth = 640
       object panStepSendPascalTitle: TPanel
         Left = 0
@@ -99,6 +198,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 640
         Align = alTop
+        Caption = 'Send Pascal'
         Color = clGradientActiveCaption
         Font.Height = -19
         Font.Style = [fsBold]
@@ -109,7 +209,8 @@ object frmMain: TfrmMain
       end
     end
     object tsChangeOnce: TTabSheet
-      ClientHeight = 343
+      Caption = 'Change Once'
+      ClientHeight = 338
       ClientWidth = 640
       object panStepChangeOnceTitle: TPanel
         Left = 0
@@ -117,6 +218,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 640
         Align = alTop
+        Caption = 'Change Once'
         Color = clGradientActiveCaption
         Font.Height = -19
         Font.Style = [fsBold]
@@ -127,7 +229,8 @@ object frmMain: TfrmMain
       end
     end
     object tsChangeTwice: TTabSheet
-      ClientHeight = 343
+      Caption = 'Change Twice'
+      ClientHeight = 338
       ClientWidth = 640
       object panStepChangeTwiceTitle: TPanel
         Left = 0
@@ -135,6 +238,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 640
         Align = alTop
+        Caption = 'Change Twice'
         Color = clGradientActiveCaption
         Font.Height = -19
         Font.Style = [fsBold]
@@ -151,7 +255,18 @@ object frmMain: TfrmMain
     Top = 510
     Width = 800
     Align = alBottom
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
     TabOrder = 3
+  end
+  object splLog: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 505
+    Width = 800
+    Align = alBottom
+    ResizeAnchor = akBottom
   end
   object mmMain: TMainMenu
     Left = 568
@@ -170,6 +285,23 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'E&xit'
       Hint = 'Exit'
+    end
+    object actStepsConnect: TAction
+      Category = 'Steps'
+      Caption = 'Connect'
+      OnExecute = actStepsConnectExecute
+    end
+    object actStepsSendPascal: TAction
+      Category = 'Steps'
+      Caption = 'Send Pascal'
+    end
+    object actStepsChangeOnce: TAction
+      Category = 'Steps'
+      Caption = 'Change Once'
+    end
+    object actStepsChangeTwice: TAction
+      Category = 'Steps'
+      Caption = 'Change Twice'
     end
   end
 end

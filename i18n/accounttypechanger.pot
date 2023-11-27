@@ -1,6 +1,24 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: data.nodestatus.rsexceptioncannotparse
+#, object-pascal-format
+msgid "Cannot parse: %s"
+msgstr ""
+
+#: data.nodestatus.rsexceptionemptystring
+msgid "MUST not be and empty string"
+msgstr ""
+
+#: data.nodestatus.rsexceptionmissingmember
+#, object-pascal-format
+msgid "Missing member: %s"
+msgstr ""
+
+#: data.nodestatus.rsexceptionnotajsonobject
+msgid "JSON Data is not an object"
+msgstr ""
+
 #: forms.main.rsapplicationstatuscaption
 #, object-pascal-format
 msgid "Status: %s"
@@ -43,19 +61,35 @@ msgstr ""
 msgid "Block: ??"
 msgstr ""
 
+#: forms.main.rserroremptyip
+msgid "You need to fill the Address/IP for the wallet"
+msgstr ""
+
+#: forms.main.rserroremptypassword
+msgid "You need to fill the Password for the wallet"
+msgstr ""
+
+#: forms.main.rserroremptyport
+msgid "You need to fill the Port for the wallet"
+msgstr ""
+
 #: forms.main.rsstepchangeonce
+msgctxt "forms.main.rsstepchangeonce"
 msgid "Change Once"
 msgstr ""
 
 #: forms.main.rsstepchangetwice
+msgctxt "forms.main.rsstepchangetwice"
 msgid "Change Twice"
 msgstr ""
 
 #: forms.main.rsstepconnect
+msgctxt "forms.main.rsstepconnect"
 msgid "Connect"
 msgstr ""
 
 #: forms.main.rsstepsendpascal
+msgctxt "forms.main.rsstepsendpascal"
 msgid "Send Pascal"
 msgstr ""
 
@@ -65,6 +99,44 @@ msgstr ""
 
 #: tfrmmain.actfileexit.hint
 msgid "Exit"
+msgstr ""
+
+#: tfrmmain.actstepschangeonce.caption
+msgctxt "tfrmmain.actstepschangeonce.caption"
+msgid "Change Once"
+msgstr ""
+
+#: tfrmmain.actstepschangetwice.caption
+msgctxt "tfrmmain.actstepschangetwice.caption"
+msgid "Change Twice"
+msgstr ""
+
+#: tfrmmain.actstepsconnect.caption
+msgctxt "tfrmmain.actstepsconnect.caption"
+msgid "Connect"
+msgstr ""
+
+#: tfrmmain.actstepssendpascal.caption
+msgctxt "tfrmmain.actstepssendpascal.caption"
+msgid "Send Pascal"
+msgstr ""
+
+#: tfrmmain.edtwalletip.text
+msgctxt "tfrmmain.edtwalletip.text"
+msgid "127.0.0.1"
+msgstr ""
+
+#: tfrmmain.edtwalletip.texthint
+msgctxt "tfrmmain.edtwalletip.texthint"
+msgid "127.0.0.1"
+msgstr ""
+
+#: tfrmmain.edtwalletpassword.texthint
+msgid "Secret"
+msgstr ""
+
+#: tfrmmain.label1.caption
+msgid "Wallet Pa&ssword"
 msgstr ""
 
 #: tfrmmain.lblhelp.caption
@@ -78,7 +150,55 @@ msgid ""
 "Until a bit more automation is implemented, please follow these steps."
 msgstr ""
 
+#: tfrmmain.lblwalletip.caption
+msgid "Wallet &Address or IP"
+msgstr ""
+
+#: tfrmmain.lblwalletport.caption
+msgid "Wallet &Port"
+msgstr ""
+
 #: tfrmmain.mnufile.caption
 msgid "&File"
+msgstr ""
+
+#: tfrmmain.panstepchangeoncetitle.caption
+msgctxt "tfrmmain.panstepchangeoncetitle.caption"
+msgid "Change Once"
+msgstr ""
+
+#: tfrmmain.panstepchangetwicetitle.caption
+msgctxt "tfrmmain.panstepchangetwicetitle.caption"
+msgid "Change Twice"
+msgstr ""
+
+#: tfrmmain.panstepconnecttitle.caption
+msgctxt "tfrmmain.panstepconnecttitle.caption"
+msgid "Connect"
+msgstr ""
+
+#: tfrmmain.panstepsendpascaltitle.caption
+msgctxt "tfrmmain.panstepsendpascaltitle.caption"
+msgid "Send Pascal"
+msgstr ""
+
+#: tfrmmain.tschangeonce.caption
+msgctxt "tfrmmain.tschangeonce.caption"
+msgid "Change Once"
+msgstr ""
+
+#: tfrmmain.tschangetwice.caption
+msgctxt "tfrmmain.tschangetwice.caption"
+msgid "Change Twice"
+msgstr ""
+
+#: tfrmmain.tsconnect.caption
+msgctxt "tfrmmain.tsconnect.caption"
+msgid "Connect"
+msgstr ""
+
+#: tfrmmain.tssendpascal.caption
+msgctxt "tfrmmain.tssendpascal.caption"
+msgid "Send Pascal"
 msgstr ""
 
