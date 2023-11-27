@@ -99,6 +99,7 @@ type
 
 const
   cVersion = {$I 'version.inc'};
+  cMethodNodeStatus = 'nodestatus';
 
 resourcestring
   rsApplicationTitle = 'Account Type Changer';
@@ -199,10 +200,10 @@ end;
 procedure TfrmMain.actStepsConnectExecute(Sender: TObject);
 var
   success: Boolean = False;
-  jsonRPCRequest: TRequest;
+  jsonRPCRequest: TJSONRPCRequest;
   jsonRequestBody: TStringStream;
   jsonResponse: String;
-  jsonRPCResponse: TResponse;
+  jsonRPCResponse: TJSONRPCResponse;
   jsonNodeStatus: TNodeStatus;
 begin
   actStepsConnect.Enabled:= False;
@@ -234,10 +235,10 @@ begin
 
   FHTTPClient:= TFPHTTPClient.Create(nil);
   try
-    jsonRPCRequest:= TRequest.Create;
+    jsonRPCRequest:= TJSONRPCRequest.Create;
     try
       jsonRPCRequest.CompressedJSON:= True;
-      jsonRPCRequest.Method:= 'nodestatus';
+      jsonRPCRequest.Method:= cMethodNodeStatus;
       jsonRPCRequest.ID:= RPCID;
       Inc(RPCID);
 
@@ -250,24 +251,25 @@ begin
             'http://%s:%d',
             [ edtWalletIP.Text, edtWalletPort.Value ]
           ));
-          if Pos('error', jsonResponse) > 0 then
-          begin
-            // Deal with an RPC error
-          end;
-          jsonRPCResponse:= TResponse.Create(jsonResponse);
+          jsonRPCResponse:= TJSONRPCResponse.Create(jsonResponse);
           try
             jsonRPCResponse.CompressedJSON:= False;
-            //memLog.Append(jsonRPCResponse.FormatJSON);
-            jsonNodeStatus:= TNodeStatus.Create(jsonRPCResponse.Result);
-            try
-              CurrentStatus:= stConnected;
-              LastBlock:= jsonNodeStatus.Blocks;
-              UpdateStatus;
-              jsonNodeStatus.CompressedJSON:= False;
-              memLog.Append(jsonNodeStatus.FormatJSON);
-            finally
-              jsonNodeStatus.Free;
+            memLog.Append(jsonRPCResponse.FormatJSON);
+
+            if not jsonRPCResponse.HasError then
+            begin
+              jsonNodeStatus:= TNodeStatus.Create(jsonRPCResponse.Result);
+              try
+                CurrentStatus:= stConnected;
+                LastBlock:= jsonNodeStatus.Blocks;
+                UpdateStatus;
+                jsonNodeStatus.CompressedJSON:= False;
+                memLog.Append(jsonNodeStatus.FormatJSON);
+              finally
+                jsonNodeStatus.Free;
+              end;
             end;
+
           finally
             jsonRPCResponse.Free;
           end;
