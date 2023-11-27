@@ -1,0 +1,3 @@
+[submodule "lazJSONRPCData"]
+	path = lazJSONRPCData
+	url = git@github.com:gcarreno/lazJSONRPCData.git
