@@ -1,0 +1,19 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: forms.main.rsapplicationtitle
+msgid "Account Type Changer"
+msgstr ""
+
+#: tfrmmain.actfileexit.caption
+msgid "E&xit"
+msgstr ""
+
+#: tfrmmain.actfileexit.hint
+msgid "Exit"
+msgstr ""
+
+#: tfrmmain.mnufile.caption
+msgid "&File"
+msgstr ""
+

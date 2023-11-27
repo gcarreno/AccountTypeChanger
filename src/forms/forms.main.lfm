@@ -1,0 +1,31 @@
+object frmMain: TfrmMain
+  Left = 399
+  Height = 600
+  Top = 32
+  Width = 800
+  Constraints.MinHeight = 600
+  Constraints.MinWidth = 800
+  Menu = mmMain
+  Position = poDefault
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  object mmMain: TMainMenu
+    Left = 568
+    Top = 400
+    object mnuFile: TMenuItem
+      Caption = '&File'
+      object mnuFileExit: TMenuItem
+        Action = actFileExit
+      end
+    end
+  end
+  object alMain: TActionList
+    Left = 644
+    Top = 400
+    object actFileExit: TFileExit
+      Category = 'File'
+      Caption = 'E&xit'
+      Hint = 'Exit'
+    end
+  end
+end
