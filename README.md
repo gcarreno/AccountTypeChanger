@@ -15,9 +15,10 @@ With this empirical knowledge, I'm back to my original idea and making it.
 ### Connection to the wallet
 
 1. Start your local instance of a wallet.
-2. Start this application.
-3. Fill in the necessary details to connect to the wallet.
-4. Press the `Connect` button.
+2. Make sure that the RPC server is enabled.
+3. Start this application.
+4. Fill in the necessary details to connect to the wallet.
+5. Press the `Connect` button.
 
 ### Steps
 
