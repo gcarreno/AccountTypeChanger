@@ -3,12 +3,156 @@ object frmMain: TfrmMain
   Height = 600
   Top = 32
   Width = 800
+  ClientHeight = 600
+  ClientWidth = 800
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
   Menu = mmMain
   Position = poDefault
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  object panInfo: TPanel
+    Left = 0
+    Height = 136
+    Top = 0
+    Width = 800
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 136
+    ClientWidth = 800
+    TabOrder = 0
+    object lblStatus: TLabel
+      Left = 5
+      Height = 1
+      Top = 5
+      Width = 794
+      Align = alTop
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 4
+    end
+    object lblBlock: TLabel
+      Left = 5
+      Height = 1
+      Top = 10
+      Width = 794
+      Align = alTop
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 4
+    end
+    object lblHelp: TStaticText
+      Left = 5
+      Height = 104
+      Top = 27
+      Width = 794
+      Align = alTop
+      AutoSize = True
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 16
+      BorderSpacing.Bottom = 4
+      Caption = 'First fill in the Connect section.'#10'Second chose accounts on the Send Pascal section.'#10'Third change once.'#10'Third change twice.'#10#10'Until a bit more automation is implemented, please follow these steps.'
+      TabOrder = 0
+    end
+  end
+  object lbSteps: TListBox
+    Left = 0
+    Height = 374
+    Top = 136
+    Width = 150
+    Align = alLeft
+    ItemHeight = 0
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object pcSteps: TPageControl
+    Left = 150
+    Height = 374
+    Top = 136
+    Width = 650
+    ActivePage = tsConnect
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 2
+    object tsConnect: TTabSheet
+      ClientHeight = 343
+      ClientWidth = 640
+      object panStepConnectTitle: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 640
+        Align = alTop
+        Color = clGradientActiveCaption
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object tsSendPascal: TTabSheet
+      ClientHeight = 343
+      ClientWidth = 640
+      object panStepSendPascalTitle: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 640
+        Align = alTop
+        Color = clGradientActiveCaption
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object tsChangeOnce: TTabSheet
+      ClientHeight = 343
+      ClientWidth = 640
+      object panStepChangeOnceTitle: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 640
+        Align = alTop
+        Color = clGradientActiveCaption
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object tsChangeTwice: TTabSheet
+      ClientHeight = 343
+      ClientWidth = 640
+      object panStepChangeTwiceTitle: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 640
+        Align = alTop
+        Color = clGradientActiveCaption
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+  end
+  object memLog: TMemo
+    Left = 0
+    Height = 90
+    Top = 510
+    Width = 800
+    Align = alBottom
+    TabOrder = 3
+  end
   object mmMain: TMainMenu
     Left = 568
     Top = 400

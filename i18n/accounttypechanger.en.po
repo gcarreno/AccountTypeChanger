@@ -11,8 +11,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4\n"
 
+#: forms.main.rsapplicationstatuscaption
+#, object-pascal-format
+msgid "Status: %s"
+msgstr ""
+
+#: forms.main.rsapplicationstatuschangedonce
+msgid "Changed Once"
+msgstr ""
+
+#: forms.main.rsapplicationstatuschangedtwice
+msgid "Changed Twice"
+msgstr ""
+
+#: forms.main.rsapplicationstatusconnected
+msgid "Connected"
+msgstr ""
+
+#: forms.main.rsapplicationstatusdisconnected
+msgid "Disconnected"
+msgstr ""
+
+#: forms.main.rsapplicationstatuspascalsent
+msgid "Pascal Sent"
+msgstr ""
+
+#: forms.main.rsapplicationstatusunlocked
+msgid "Unlocked"
+msgstr ""
+
 #: forms.main.rsapplicationtitle
 msgid "Account Type Changer"
+msgstr ""
+
+#: forms.main.rsblocknumber
+#, object-pascal-format
+msgid "Block: %d"
+msgstr ""
+
+#: forms.main.rsblockunknown
+msgid "Block: ??"
+msgstr ""
+
+#: forms.main.rsstepchangeonce
+msgid "Change Once"
+msgstr ""
+
+#: forms.main.rsstepchangetwice
+msgid "Change Twice"
+msgstr ""
+
+#: forms.main.rsstepconnect
+msgid "Connect"
+msgstr ""
+
+#: forms.main.rsstepsendpascal
+msgid "Send Pascal"
 msgstr ""
 
 #: tfrmmain.actfileexit.caption
@@ -21,6 +75,17 @@ msgstr ""
 
 #: tfrmmain.actfileexit.hint
 msgid "Exit"
+msgstr ""
+
+#: tfrmmain.lblhelp.caption
+msgctxt "tfrmmain.lblhelp.caption"
+msgid ""
+"First fill in the Connect section.\n"
+"Second chose accounts on the Send Pascal section.\n"
+"Third change once.\n"
+"Third change twice.\n"
+"\n"
+"Until a bit more automation is implemented, please follow these steps."
 msgstr ""
 
 #: tfrmmain.mnufile.caption

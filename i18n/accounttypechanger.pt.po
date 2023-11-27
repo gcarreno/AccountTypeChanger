@@ -11,9 +11,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4\n"
 
+#: forms.main.rsapplicationstatuscaption
+#, object-pascal-format
+msgid "Status: %s"
+msgstr "Estado: %s"
+
+#: forms.main.rsapplicationstatuschangedonce
+msgid "Changed Once"
+msgstr "Modificar Primeira Vez"
+
+#: forms.main.rsapplicationstatuschangedtwice
+msgid "Changed Twice"
+msgstr "Modificar Segunda Vez"
+
+#: forms.main.rsapplicationstatusconnected
+msgid "Connected"
+msgstr "Connectado"
+
+#: forms.main.rsapplicationstatusdisconnected
+msgid "Disconnected"
+msgstr "Desconectado"
+
+#: forms.main.rsapplicationstatuspascalsent
+msgid "Pascal Sent"
+msgstr "Pascal Enviado"
+
+#: forms.main.rsapplicationstatusunlocked
+msgid "Unlocked"
+msgstr "Desbloqueado"
+
 #: forms.main.rsapplicationtitle
 msgid "Account Type Changer"
 msgstr "Modificar Tipo de Conta"
+
+#: forms.main.rsblocknumber
+#, object-pascal-format
+msgid "Block: %d"
+msgstr "Bloco: %d"
+
+#: forms.main.rsblockunknown
+msgid "Block: ??"
+msgstr "Bloco: ??"
+
+#: forms.main.rsstepchangeonce
+msgid "Change Once"
+msgstr "Modificar Primeira Vez"
+
+#: forms.main.rsstepchangetwice
+msgid "Change Twice"
+msgstr "Modificar Segunda Vez"
+
+#: forms.main.rsstepconnect
+msgid "Connect"
+msgstr "Conectar"
+
+#: forms.main.rsstepsendpascal
+msgid "Send Pascal"
+msgstr "Enviar Pascal"
 
 #: tfrmmain.actfileexit.caption
 msgid "E&xit"
@@ -23,7 +77,23 @@ msgstr "Sair(&x)"
 msgid "Exit"
 msgstr "Sair"
 
+#: tfrmmain.lblhelp.caption
+msgctxt "tfrmmain.lblhelp.caption"
+msgid ""
+"First fill in the Connect section.\n"
+"Second chose accounts on the Send Pascal section.\n"
+"Third change once.\n"
+"Third change twice.\n"
+"\n"
+"Until a bit more automation is implemented, please follow these steps."
+msgstr ""
+"Primeiro completar os campos na secção Conectar.\n"
+"Segundo selecionar as contas na secção Enviar Pascal.\n"
+"Terceiro modificar pela primeira vez.\n"
+"Quarto modificar pela segunda vez.\n"
+"\n"
+"Enquanto um pouco mais de automação for implementada, é favor seguir estes passos."
+
 #: tfrmmain.mnufile.caption
 msgid "&File"
 msgstr "&Ficheiro"
-
