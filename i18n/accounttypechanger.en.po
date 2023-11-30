@@ -71,6 +71,11 @@ msgstr ""
 msgid "Block: ??"
 msgstr ""
 
+#: forms.main.rserror
+#, object-pascal-format
+msgid "ERROR: %s"
+msgstr ""
+
 #: forms.main.rserroremptyip
 msgid "You need to fill the Address/IP for the wallet"
 msgstr ""
@@ -81,6 +86,11 @@ msgstr ""
 
 #: forms.main.rserroremptyport
 msgid "You need to fill the Port for the wallet"
+msgstr ""
+
+#: forms.main.rsrpcerror
+#, object-pascal-format
+msgid "RPC Error[%d]; %s"
 msgstr ""
 
 #: forms.main.rsstepchangeonce

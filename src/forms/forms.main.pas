@@ -19,7 +19,12 @@ uses
 , ComCtrls
 , Spin
 , fphttpclient
+, fpjson
 , DefaultTranslator
+, LJD.Request
+, LJD.Response
+, LJD.Error
+, Data.NodeStatus
 ;
 
 type
@@ -69,6 +74,11 @@ type
 
     procedure InitShortcuts;
     procedure UpdateStatus;
+
+    function DoRPCRequest(AJSONRPCRequest: TJSONRPCRequest): TJSONRPCResponse;
+
+    function FetchNodeStatus: TNodeStatus;
+    function DoWalletUnlock: Boolean;
   public
 
   end;
@@ -80,11 +90,6 @@ implementation
 
 uses
   LCLType
-, LJD.Request
-, LJD.Response
-, LJD.Error
-, Data.NodeStatus
-, fpjson
 ;
 
 type
@@ -99,14 +104,21 @@ type
 
 const
   cVersion = {$I 'version.inc'};
+  cURL = 'http://%s:%d';
   cMethodNodeStatus = 'nodestatus';
+  cMethodUnlock = 'unlock';
+
+  cParamPassword = 'pwd';
 
 resourcestring
   rsApplicationTitle = 'Account Type Changer';
 
+  rsError = 'ERROR: %s';
   rsErrorEmptyIP = 'You need to fill the Address/IP for the wallet';
   rsErrorEmptyPort = 'You need to fill the Port for the wallet';
   rsErrorEmptyPassword = 'You need to fill the Password for the wallet';
+
+  rsRPCError = 'RPC Error[%d]; %s';
 
   rsApplicationStatusCaption = 'Status: %s';
   rsApplicationStatusDisconnected = 'Disconnected';
@@ -197,13 +209,82 @@ begin
   end;
 end;
 
+function TfrmMain.DoRPCRequest(
+  AJSONRPCRequest: TJSONRPCRequest): TJSONRPCResponse;
+var
+  jsonRequestBody: TStringStream;
+  jsonResponse: String;
+begin
+  Result:= nil;
+  FHTTPClient:= TFPHTTPClient.Create(nil);
+  try
+    AJSONRPCRequest.CompressedJSON:= True;
+    jsonRequestBody:= TStringStream.Create(AJSONRPCRequest.AsJSON);
+    FHTTPClient.AllowRedirect:= True;
+    FHTTPClient.RequestBody:= jsonRequestBody;
+    jsonResponse:= FHTTPClient.Post(Format(
+      cURL,
+      [ edtWalletIP.Text, edtWalletPort.Value ]
+    ));
+    Result:= TJSONRPCResponse.Create(jsonResponse);
+    if Result.HasError then
+    begin
+      raise Exception.Create(Format(rsRPCError, [
+        Result.Error.Code,
+        Result.Error.Message
+      ]));
+    end;
+  finally
+    FHTTPClient.Free;
+  end;
+end;
+
+function TfrmMain.FetchNodeStatus: TNodeStatus;
+var
+  jsonRPCRequest: TJSONRPCRequest;
+  jsonRPCResponse: TJSONRPCResponse;
+begin
+  Result:= nil;
+  jsonRPCRequest:= TJSONRPCRequest.Create;
+  try
+    jsonRPCRequest.Method:= cMethodNodeStatus;
+    jsonRPCRequest.ID:= RPCID;
+    Inc(RPCID);
+    jsonRPCResponse:= DoRPCRequest(jsonRPCRequest);
+    Result:= TNodeStatus.Create(jsonRPCResponse.Result);
+    jsonRPCResponse.Free;
+  finally
+    jsonRPCRequest.Free;
+  end;
+end;
+
+function TfrmMain.DoWalletUnlock: Boolean;
+var
+  jsonRPCRequest: TJSONRPCRequest;
+  jsonRPCResponse: TJSONRPCResponse;
+
+begin
+  Result:= False;
+  jsonRPCRequest:= TJSONRPCRequest.Create;
+  try
+    jsonRPCRequest.Method:= cMethodUnlock;
+    jsonRPCRequest.Params:= TJSONObject.Create;
+    jsonRPCRequest.ID:= RPCID;
+    Inc(RPCID);
+    TJSONObject(jsonRPCRequest.Params).Add(cParamPassword, edtWalletPassword.Text);
+    jsonRPCResponse:= DoRPCRequest(jsonRPCRequest);
+
+    Result:= jsonRPCResponse.Result.AsBoolean;
+
+    jsonRPCResponse.Free;
+  finally
+    jsonRPCRequest.Free;
+  end;
+end;
+
 procedure TfrmMain.actStepsConnectExecute(Sender: TObject);
 var
   success: Boolean = False;
-  jsonRPCRequest: TJSONRPCRequest;
-  jsonRequestBody: TStringStream;
-  jsonResponse: String;
-  jsonRPCResponse: TJSONRPCResponse;
   jsonNodeStatus: TNodeStatus;
 begin
   actStepsConnect.Enabled:= False;
@@ -233,58 +314,44 @@ begin
     exit;
   end;
 
-  FHTTPClient:= TFPHTTPClient.Create(nil);
+  // Node Status
   try
-    jsonRPCRequest:= TJSONRPCRequest.Create;
-    try
-      jsonRPCRequest.CompressedJSON:= True;
-      jsonRPCRequest.Method:= cMethodNodeStatus;
-      jsonRPCRequest.ID:= RPCID;
-      Inc(RPCID);
-
-      jsonRequestBody:= TStringStream.Create(jsonRPCRequest.AsJSON);
-      try
-        FHTTPClient.AllowRedirect:= True;
-        FHTTPClient.RequestBody:= jsonRequestBody;
-        try
-          jsonResponse:= FHTTPClient.Post(Format(
-            'http://%s:%d',
-            [ edtWalletIP.Text, edtWalletPort.Value ]
-          ));
-          jsonRPCResponse:= TJSONRPCResponse.Create(jsonResponse);
-          try
-            jsonRPCResponse.CompressedJSON:= False;
-            memLog.Append(jsonRPCResponse.FormatJSON);
-
-            if not jsonRPCResponse.HasError then
-            begin
-              jsonNodeStatus:= TNodeStatus.Create(jsonRPCResponse.Result);
-              try
-                CurrentStatus:= stConnected;
-                LastBlock:= jsonNodeStatus.Blocks;
-                UpdateStatus;
-                jsonNodeStatus.CompressedJSON:= False;
-                memLog.Append(jsonNodeStatus.FormatJSON);
-              finally
-                jsonNodeStatus.Free;
-              end;
-            end;
-
-          finally
-            jsonRPCResponse.Free;
-          end;
-          success:= True;
-        except
-          // Deal with errors
-        end;
-      finally
-        jsonRequestBody.Free;
-      end;
-    finally
-      jsonRPCRequest.Free;
+    jsonNodeStatus:= FetchNodeStatus;
+    CurrentStatus:= stConnected;
+    LastBlock:= jsonNodeStatus.Blocks;
+    CurrentBlock:= LastBlock;
+    UpdateStatus;
+  except
+    on E:Exception do
+    begin
+      memLog.Append(Format(rsError, [ E.Message ]));
     end;
-  finally
-    FHTTPClient.Free;
+  end;
+
+  // Unlock
+  if jsonNodeStatus.Locked then
+  begin
+    memLog.Append('Wallet locked, attempting unlock');
+    try
+      if DoWalletUnlock then
+      begin
+        memLog.Append('Wallet unlocked');
+        success:= True;
+      end
+      else
+      begin
+        memLog.Append('Could not unlock wallet');
+      end;
+    except
+      on E:Exception do
+      begin
+        memLog.Append(Format(rsError, [ E.Message ]));
+      end;
+    end;
+  end
+  else
+  begin
+    memLog.Append('Wallet already unlocked');
   end;
 
   Application.ProcessMessages;

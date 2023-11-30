@@ -9,6 +9,7 @@ object frmMain: TfrmMain
   Constraints.MinWidth = 800
   Menu = mmMain
   Position = poDefault
+  LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   object panInfo: TPanel
@@ -74,7 +75,7 @@ object frmMain: TfrmMain
     TabOrder = 2
     object tsConnect: TTabSheet
       Caption = 'Connect'
-      ClientHeight = 338
+      ClientHeight = 335
       ClientWidth = 640
       object panStepConnectTitle: TPanel
         Left = 0
@@ -190,7 +191,7 @@ object frmMain: TfrmMain
     end
     object tsSendPascal: TTabSheet
       Caption = 'Send Pascal'
-      ClientHeight = 338
+      ClientHeight = 335
       ClientWidth = 640
       object panStepSendPascalTitle: TPanel
         Left = 0
@@ -210,7 +211,7 @@ object frmMain: TfrmMain
     end
     object tsChangeOnce: TTabSheet
       Caption = 'Change Once'
-      ClientHeight = 338
+      ClientHeight = 335
       ClientWidth = 640
       object panStepChangeOnceTitle: TPanel
         Left = 0
@@ -230,7 +231,7 @@ object frmMain: TfrmMain
     end
     object tsChangeTwice: TTabSheet
       Caption = 'Change Twice'
-      ClientHeight = 338
+      ClientHeight = 335
       ClientWidth = 640
       object panStepChangeTwiceTitle: TPanel
         Left = 0
